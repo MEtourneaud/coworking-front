@@ -23,7 +23,7 @@ const AdminCoworkingsPage = () => {
       headers: { Authorization: "Bearer " + token },
     })
 
-    //J'effectue une requête FETCH de type GET pour récupérer la liste mise à jour des coworkings
+    //J'effectue une requête FETCH pour récupérer la liste mise à jour des coworkings
     const coworkingResponse = await fetch(`http://localhost:3000/api/coworkings`)
 
     //Je convertis la réponse JSON en JAVASCRIPT
