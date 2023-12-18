@@ -4,6 +4,7 @@ import CoworkingsPage from "./pages/guest/CoworkingsPage"
 import CoworkingDetailsPage from "./pages/guest/CoworkingDetailsPage"
 import DashboardPage from "./pages/admin/DashboardPage"
 import LoginPage from "./pages/guest/LoginPage"
+import AdminCoworkingsPage from "./pages/admin/AdminCoworkingsPage"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
 
         <Route path="/admin/" element={<DashboardPage />} />
+        <Route path="/admin/coworkings" element={<AdminCoworkingsPage />} />
       </Routes>
     </BrowserRouter>
   )

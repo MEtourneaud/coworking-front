@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
-import HeaderAdmin from "../../components/admin/HeaderAdmin"
 import { useEffect } from "react"
+import HeaderAdmin from "../../components/admin/HeaderAdmin"
 
 const DashboardPage = () => {
   //Je récupère la fonction navigate du react-router qui permet de rediriger l'utilisateur
@@ -15,6 +15,11 @@ const DashboardPage = () => {
     if (!token) {
       navigate("/login")
     }
+
+    // idéalement, si y'a un token existant,
+    // on le décode (avec jwt-decode) et on regarde si les données sont correctes
+    // si elles ne sont pas correctes (pas de clé data etc)
+    // on redirige
   })
 
   return (
