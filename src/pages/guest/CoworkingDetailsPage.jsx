@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import Header from "../components/Header"
+import Header from "../../components/guest/Header"
 import { useParams } from "react-router-dom"
 
 const CoworkingDetailsPage = () => {
@@ -12,15 +12,24 @@ const CoworkingDetailsPage = () => {
       const coworkingInJs = await coworkingResponse.json()
       setCoworking(coworkingInJs)
     })()
-    // eslint-disable-next-line
-  }, [])
+  }, [coworkingId])
 
   return (
     <>
       <Header />
       {coworking ? (
         <article>
-          <h3>{coworking.name}</h3>
+          <h3>{coworking.data.name}</h3>
+          <p>Prix : </p>
+          <ul>
+            <li>Heure : {coworking.data.price.hour}</li>
+            <li>Jour : {coworking.data.price.day}</li>
+            <li>Mois : {coworking.data.price.month}</li>
+          </ul>
+          <p>
+            Adresse : {coworking.data.address.number} {coworking.data.address.street},{" "}
+            {coworking.data.address.postCode} - {coworking.data.address.city}
+          </p>
         </article>
       ) : (
         <p>Dommage</p>

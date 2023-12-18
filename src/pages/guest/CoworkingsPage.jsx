@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import Header from "../components/Header"
+import Header from "../../components/guest/Header"
+import { Link } from "react-router-dom"
 
 const CoworkingsPage = () => {
   const [coworkings, setCoworkings] = useState(null)
@@ -22,6 +23,7 @@ const CoworkingsPage = () => {
             return (
               <article>
                 <h3>{coworking.name}</h3>
+                <Link to={`/coworkings/details/${coworking.id}`}>Voir le coworking</Link>
               </article>
             )
           })}
