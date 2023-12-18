@@ -31,7 +31,10 @@ const LoginPage = () => {
     //Je récupère le token à partir de loginResponseData
     const token = loginResponseData.data
 
-    console.log(token)
+    //Si le token existe, je le stocke dans le local storage du navigateur
+    if (token) {
+      localStorage.setItem("jwt", token)
+    }
   }
 
   return (
