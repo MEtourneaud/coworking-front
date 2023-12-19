@@ -12,7 +12,8 @@ const CoworkingDetailsPage = () => {
       const coworkingInJs = await coworkingResponse.json()
       setCoworking(coworkingInJs)
     })()
-  }, [coworkingId])
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <>
