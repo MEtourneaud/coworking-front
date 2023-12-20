@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import HeaderAdmin from "../../components/admin/HeaderAdmin"
+import { Link } from "react-router-dom"
 
 const AdminCoworkingsPage = () => {
   const [coworkings, setCoworkings] = useState(null)
@@ -44,6 +45,9 @@ const AdminCoworkingsPage = () => {
                 <button onClick={(event) => handleDeleteCoworking(event, coworking.id)}>
                   Supprimer
                 </button>
+                <Link to={`/admin/coworkings/update/${coworking.id}`}>
+                  <button>Modifier</button>
+                </Link>
               </article>
             )
           })}

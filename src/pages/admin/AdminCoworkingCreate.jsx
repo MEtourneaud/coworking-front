@@ -1,4 +1,5 @@
 import { useState } from "react"
+import HeaderAdmin from "../../components/admin/HeaderAdmin"
 
 const AdminCoworkingsCreate = () => {
   const [message, setMessage] = useState()
@@ -62,6 +63,8 @@ const AdminCoworkingsCreate = () => {
 
   return (
     <>
+      <HeaderAdmin />
+      <h2>Création d'un coworking</h2>
       {message && <p>{message}</p>}
       <form onSubmit={handleCreateCoworking}>
         <div>

@@ -1,23 +1,17 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import HeaderAdmin from "../../components/admin/HeaderAdmin"
 
 const AdminCoworkingUpdate = () => {
-  //J'extrais l'ID du coworking depuis l'URL
   const { coworkingId } = useParams()
 
-  //useState permet de stocker dans une variable et donner par défaut la valeur "null"
-  //qu'il l'utilisera au premier chargement
-  //Aux chargements suivants, il prendra la valeur stocké dans le composant
+  const [message, setMessage] = useState()
+
   const [coworking, setCoworking] = useState(null)
 
-  //useEffect permet d'executer du code uniquement à certains chargement du composant(le premier, à chaque fois, etc)
-  //On place un tableau vide en deuxième paramètre pour exécuter la fonction une seule fois au premier chargement du composant
   useEffect(() => {
-    //J'utilise une fonction anonyme qui s'auto-invoque pour effectuer des opérations asynchrone
     ;(async () => {
-      //J'attend jusqu'à avoir récupéré les données du coworking spécifié par son ID
       const coworkingResponse = await fetch(`http://localhost:3000/api/coworkings/${coworkingId}`)
-      //Je convertis les données JSON en JS
       const coworkingInJs = await coworkingResponse.json()
       setCoworking(coworkingInJs.data)
     })()
@@ -26,10 +20,67 @@ const AdminCoworkingUpdate = () => {
 
   console.log(coworking)
 
+  const handleUpdateCoworking = async (event) => {
+    event.preventDefault()
+
+    const name = event.target.name.value
+    const priceByHour = event.target.priceByHour.value
+    const priceByDay = event.target.priceByDay.value
+    const priceByMonth = event.target.priceByMonth.value
+    const addressNumber = event.target.addressNumber.value
+    const addressStreet = event.target.addressStreet.value
+    const addressPostCode = event.target.addressPostCode.value
+    const addressCity = event.target.addressCity.value
+    const superficy = event.target.superficy.value
+    const capacity = event.target.capacity.value
+
+    const coworkingToUpdate = {
+      name: name,
+      price: {
+        hour: priceByHour,
+        day: priceByDay,
+        month: priceByMonth,
+      },
+      adress: {
+        number: addressNumber,
+        street: addressStreet,
+        postCode: addressPostCode,
+        city: addressCity,
+      },
+      superficy: superficy,
+      capacity: capacity,
+    }
+
+    const coworkingToUpdateJson = JSON.stringify(coworkingToUpdate)
+
+    const token = localStorage.getItem("jwt")
+
+    const coworkingToUpdateResponse = await fetch(
+      `http://localhost:3000/api/coworkings/${coworkingId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: coworkingToUpdateJson,
+      }
+    )
+
+    if (coworkingToUpdateResponse.status === 201) {
+      setMessage("Mise à jour OK")
+    } else {
+      setMessage("Une erreur est survenue !")
+    }
+  }
+
   return (
     <>
+      <HeaderAdmin />
+      <h2>Modification du coworking</h2>
+      <>{message && <p>{message}</p>}</>
       {coworking && (
-        <form>
+        <form onSubmit={handleUpdateCoworking}>
           <div>
             <label>
               Nom
