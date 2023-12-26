@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import HeaderAdmin from "../../components/admin/HeaderAdmin"
+import { useVerifyIfUserIsLogged } from "../utils/security-utils"
 
 const AdminCoworkingUpdate = () => {
+  useVerifyIfUserIsLogged()
   const { coworkingId } = useParams()
 
   const [message, setMessage] = useState()

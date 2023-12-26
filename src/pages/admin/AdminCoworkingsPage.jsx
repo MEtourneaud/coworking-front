@@ -2,8 +2,10 @@ import { useEffect, useState } from "react"
 import HeaderAdmin from "../../components/admin/HeaderAdmin"
 import { Link } from "react-router-dom"
 import { jwtDecode } from "jwt-decode"
+import { useVerifyIfUserIsLogged } from "../utils/security-utils"
 
 const AdminCoworkingsPage = () => {
+  useVerifyIfUserIsLogged()
   const [coworkings, setCoworkings] = useState(null)
   //Je récupère le token depuis le localStorage
   const token = localStorage.getItem("jwt")

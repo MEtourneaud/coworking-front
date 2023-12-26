@@ -1,7 +1,9 @@
 import { useState } from "react"
 import HeaderAdmin from "../../components/admin/HeaderAdmin"
+import { useVerifyIfUserIsLogged } from "../utils/security-utils"
 
 const AdminCoworkingsCreate = () => {
+  useVerifyIfUserIsLogged()
   const [message, setMessage] = useState()
 
   const handleCreateCoworking = async (event) => {
